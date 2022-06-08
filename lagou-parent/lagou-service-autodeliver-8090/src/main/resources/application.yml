@@ -1,0 +1,49 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: lagou-service-autodeliver
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://139.224.134.91:3306/lagou?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: mysqlpass
+  jpa:
+    database: MySQL
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #避免将驼峰命名转换为下划线命名
+eureka:
+  client:
+    service-url: #配置客户端所交互的Eureka Server的地址
+      # 集群模式下，应该指向其他Eureka Server；多个Server用逗号“，”隔开
+      defaultZone: http://LagouCloudEurekaServerA:8761/eureka,http://LagouCloudEurekaServerB:8762/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@
+
+# springboot中暴露健康检查等断点接⼝
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  # 暴露健康接⼝的细节
+  endpoint:
+    health:
+      show-details: always
+
+# 配置熔断策略：
+hystrix:
+  command:
+    default:
+      circuitBreaker:
+        forceOpen: false  # 强制打开熔断器，如果该属性设置为true，强制断路器进⼊打开状态，将会拒绝所有的请求。 默认false关闭的
+        errorThresholdPercentage: 50  # 触发熔断错误⽐例阈值，默认值50%
+        sleepWindowInMilliseconds: 3000 # 熔断后休眠时⻓，默认值5秒
+        requestVolumeThreshold: 2 # 熔断触发最⼩请求次数，默认值是20
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000 # 熔断超时设置，默认为1秒

@@ -1,0 +1,5 @@
+com\lagou\edu\config\FeignConfig.class
+com\lagou\edu\controller\AutoDeliverController.class
+com\lagou\edu\service\ResumeFallback.class
+com\lagou\edu\service\ResumeFeignClient.class
+com\lagou\edu\AutoDeliverApplication8091.class

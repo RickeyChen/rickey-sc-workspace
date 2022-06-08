@@ -1,0 +1,27 @@
+server:
+  port: 9002
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://LagouCloudEurekaServerA:8761/eureka,http://LagouCloudEurekaServerB:8762/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@
+
+spring:
+  application:
+    name: lagou-cloud-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: service-autodeliver-router
+#          uri: http://127.0.0.1:8091
+          uri: lb://lagou-service-autodeliver
+          predicates:
+            - Path=/autoDeliver/**
+        - id: service-resume-router
+#          uri: http://127.0.0.1:8081
+          uri: lb://lagou-service-resume
+          predicates:
+            - Path=/resume/**

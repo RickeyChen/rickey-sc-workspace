@@ -1,0 +1,16 @@
+server:
+  port: 9000
+Spring:
+  application:
+    name: lagou-cloud-hystrix-dashboard
+eureka:
+  client:
+    service-url: #配置客户端所交互的Eureka Server的地址
+      # 集群模式下，应该指向其他Eureka Server；多个Server用逗号“，”隔开
+      defaultZone: http://LagouCloudEurekaServerA:8761/eureka,http://LagouCloudEurekaServerB:8762/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "localhost"
