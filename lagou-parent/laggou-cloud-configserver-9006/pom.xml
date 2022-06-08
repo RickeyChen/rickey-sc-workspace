@@ -9,31 +9,22 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>lagou-service-resume-8081</artifactId>
+    <artifactId>laggou-cloud-configserver-9006</artifactId>
 
-    <!--功能接口：根据用户id拆查询简历的公开状态-->
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
     <dependencies>
-        <dependency>
-            <artifactId>lagou-service-common</artifactId>
-            <groupId>com.lagou.edu</groupId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
             <version>3.1.2</version>
         </dependency>
-
-        <!--config 客户端依赖-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config-client</artifactId>
-            <version>3.1.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+            <artifactId>spring-cloud-config-server</artifactId>
             <version>3.1.3</version>
         </dependency>
         <dependency>
@@ -42,6 +33,5 @@
             <version>3.1.2</version>
         </dependency>
     </dependencies>
-
 
 </project>

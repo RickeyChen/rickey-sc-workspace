@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="lagou-service-common" />
         <module name="lagou-service-autodeliver-8091" />
+        <module name="laggou-cloud-configserver-9006" />
         <module name="lagou-cloud-eureka-server-8762" />
         <module name="lagou-cloud-hystrix-turbine-9001" />
         <module name="lagou-service-autodeliver-8090" />
@@ -20,6 +21,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="laggou-cloud-configserver-9006" target="11" />
       <module name="lagou-cloud-eureka-server-8761" target="11" />
       <module name="lagou-cloud-eureka-server-8762" target="11" />
       <module name="lagou-cloud-gateway-9002" target="11" />
@@ -35,6 +37,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="laggou-cloud-configserver-9006" options="-parameters" />
       <module name="lagou-cloud-eureka-server-8761" options="-parameters" />
       <module name="lagou-cloud-eureka-server-8762" options="-parameters" />
       <module name="lagou-cloud-gateway-9002" options="-parameters" />

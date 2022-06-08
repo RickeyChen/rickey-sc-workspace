@@ -1,0 +1,46 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: lagou-service-resume
+  cloud:
+    config:
+      name: lagou-service-resume # 配置文件名称
+      profile: dev # 分支名称
+      label: master #分支名称
+      uri: http://localhost:9006
+  rabbitmq:
+    host: 139.224.134.91
+    port: 5672
+    username: rickey
+    password: rickey
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://139.224.134.91:3306/lagou?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: mysqlpass
+  jpa:
+    database: MySQL
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #避免将驼峰命名转换为下划线命名
+eureka:
+  client:
+    service-url: #配置客户端所交互的Eureka Server的地址
+      # 集群模式下，应该指向其他Eureka Server；多个Server用逗号“，”隔开
+      defaultZone: http://LagouCloudEurekaServerA:8761/eureka,http://LagouCloudEurekaServerB:8762/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@
+    # 自定义元数据
+    metadata-map:
+      cluster: cl1
+      region: rn1
+
+# 暴露所有端口
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
